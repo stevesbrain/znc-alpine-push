@@ -51,7 +51,8 @@ RUN set -x \
     && PATH=$PATH:/opt/znc/bin \
     && PYTHONDONTWRITEBYTECODE=yes \
     && make \
-    && make install \
+    && mkdir -p /znc-data/modules \
+    && cp /docker/znc-push/push.so /znc-data/modules/ \
     && rm -rf /docker/znc-push \
     && apk del build-dependencies \
     && rm -rf /znc-src; exit 0
@@ -79,7 +80,7 @@ COPY docker-entrypoint.sh /
 COPY znc.conf.example /docker
 
 #Change ownership as needed
-RUN chown znc:znc /znc-data
+RUN chown -R znc:znc /znc-data
 RUN chown -R znc:znc /docker
 
 ###TEMP
