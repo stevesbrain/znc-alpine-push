@@ -46,8 +46,8 @@ RUN set -x \
     && cd / && rm -rf /znc-src; exit 0
 
 # Add our users for ZNC
-RUN adduser -u 1001 -S znc
-RUN addgroup -g 1001 -S znc
+RUN adduser -u 1000 -S znc
+RUN addgroup -g 1000 -S znc
 
 #Make the ZNC Data dir
 RUN mkdir /znc-data
