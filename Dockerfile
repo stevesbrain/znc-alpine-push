@@ -42,6 +42,7 @@ RUN set -x \
     && gpg --batch --verify znc.tgz.sig znc.tgz \
     && rm -rf "$GNUPGHOME" \
     && tar -zxf znc.tgz --strip-components=1 \
+    && PYTHONDONTWRITEBYTECODE=yes \
     && mkdir build && cd build \
     && ../configure ${CONFIGUREFLAGS} \
     && make $MAKEFLAGS \
@@ -52,7 +53,6 @@ RUN set -x \
     && cd /docker/znc-push \
     && git checkout -b python \
     && PATH=$PATH:/opt/znc/bin \
-    && PYTHONDONTWRITEBYTECODE=yes \
     && make \
     && mkdir -p /znc-data/modules \
     && cp /docker/znc-push/push.so /znc-data/modules/ \
