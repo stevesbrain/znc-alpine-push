@@ -11,6 +11,9 @@ ARG MAKEFLAGS="-j"
 
 ENV ZNC_VERSION 1.6.4
 
+#Cleaning house
+COPY clean_py.sh /
+#RUN apk del build-dependencies
 RUN set -x \
 #    && adduser -u 1001 -S znc \
 #    && addgroup -g 1001 -S znc \
@@ -55,7 +58,8 @@ RUN set -x \
     && cp /docker/znc-push/push.so /znc-data/modules/ \
     && rm -rf /docker/znc-push \
     && apk del build-dependencies \
-    && rm -rf /znc-src; exit 0
+    && rm -rf /znc-src \
+    && /clean_py.sh; exit 0
 
 # Add our users for ZNC
 RUN adduser -u 1000 -S znc
@@ -87,10 +91,6 @@ RUN chown -R znc:znc /docker
 #RUN apk add --no-cache --virtual ncdu
 ###TEMP
 
-#Cleaning house
-COPY clean_py.sh /
-RUN /clean_py.sh
-#RUN apk del build-dependencies
 #RUN rm -rf /znc-src
 #The user that we enter the container as, and that everything runs as
 USER znc
