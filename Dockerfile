@@ -45,7 +45,8 @@ RUN set -x \
     && ../configure ${CONFIGUREFLAGS} \
     && make $MAKEFLAGS \
     && make install \
-    && apk del build-dependencies \
+    && rm -rf /src \
+    && apk del --purge build-dependencies \
     && rm -rf /znc-src; exit 0
 
 # Build the ZNC modules
@@ -66,7 +67,8 @@ RUN set -x \
     && mkdir -p /docker/modules \
     && cp /docker/znc-push/push.so /docker/modules/ \
     && rm -rf /docker/znc-push \
-    && apk del build-dependencies build-base \
+    && rm -rf /src \
+    && apk del --purge build-dependencies build-base \
     && /clean_py.sh; exit 0
 
 # Add our users for ZNC
