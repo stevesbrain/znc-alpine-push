@@ -49,8 +49,13 @@ RUN set -x \
     && rm -rf /znc-src; exit 0
 
 # Build the ZNC modules
-RUN mkdir /docker \
+RUN set -x \
+    && mkdir /docker \
     && apk add --no-cache --virtual build-dependencies \
+        build-base \
+	icu-dev \
+	openssl-dev \
+	python3-dev \
     && cd /docker \
     && git clone https://github.com/jreese/znc-push.git \
     && cd /docker/znc-push \
@@ -61,7 +66,7 @@ RUN mkdir /docker \
     && mkdir -p /docker/modules \
     && cp /docker/znc-push/push.so /docker/modules/ \
     && rm -rf /docker/znc-push \
-    && apk del build-dependencies \
+    && apk del build-dependencies build-base \
     && /clean_py.sh; exit 0
 
 # Add our users for ZNC
