@@ -6,12 +6,13 @@ if [ "${1:0:1}" != '-' ]; then
     exec "$@"
 fi
 
-if [-e /znc-data/configs/znc.conf ]; then
+mkdir -p /znc-data/configs
+mkdir -p /znc-data/moddata
+mkdir -p /znc-data/users
+
+if [ -e /znc-data/configs/znc.conf ]; then
     echo "Doing nothing; conf exists"
   else
-	  mkdir -p /znc-data/configs
-	  mkdir -p /znc-data/moddata
-	  mkdir -p /znc-data/users
 	  /opt/znc/bin/znc -p -d /znc-data/ 
 	  cp /docker/znc.conf.example /znc-data/configs/znc.conf
 fi
