@@ -41,7 +41,7 @@ RUN set -x \
     && tar -zxf znc.tgz --strip-components=1 \
     && mkdir build && cd build \
     && ../configure ${CONFIGUREFLAGS} \
-    && make $MAKEFLAGS -j `nproc` \
+    && make $MAKEFLAGS -j \
     && make install \
     && mkdir /docker \
     && cd /docker \
