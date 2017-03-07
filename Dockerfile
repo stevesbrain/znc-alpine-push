@@ -20,6 +20,7 @@ RUN set -x \
         icu \
         openssl \
         tini \
+	py3-requests \
     && apk add --no-cache --virtual build-dependencies \
         build-base \
         curl \
