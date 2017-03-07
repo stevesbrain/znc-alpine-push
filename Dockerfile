@@ -62,7 +62,7 @@ RUN adduser -u 1000 -S znc
 RUN addgroup -g 1000 -S znc
 
 #Make the ZNC Data dir
-RUN mkdir /znc-data
+#RUN mkdir /znc-data
 #RUN mkdir /docker
 
 # Python pushover
