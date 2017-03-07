@@ -51,6 +51,8 @@ RUN set -x \
     && PATH=$PATH:/opt/znc/bin \
     && PYTHONDONTWRITEBYTECODE=yes \
     && make \
+    && make install \
+    && rm -rf /docker/znc-push \
     && apk del build-dependencies \
     && rm -rf /znc-src; exit 0
 
@@ -85,8 +87,8 @@ RUN chown -R znc:znc /docker
 ###TEMP
 
 #Cleaning house
-#COPY clean_py.sh /
-#RUN /clean_py.sh
+COPY clean_py.sh /
+RUN /clean_py.sh
 #RUN apk del build-dependencies
 #RUN rm -rf /znc-src
 #The user that we enter the container as, and that everything runs as
