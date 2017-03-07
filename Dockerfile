@@ -15,8 +15,6 @@ ENV ZNC_VERSION 1.6.4
 COPY clean_py.sh /
 #RUN apk del build-dependencies
 RUN set -x \
-#    && adduser -u 1001 -S znc \
-#    && addgroup -g 1001 -S znc \
     && apk add --no-cache --virtual runtime-dependencies \
         ca-certificates \
         cyrus-sasl \
@@ -47,7 +45,11 @@ RUN set -x \
     && ../configure ${CONFIGUREFLAGS} \
     && make $MAKEFLAGS \
     && make install \
-    && mkdir /docker \
+    && apk del build-dependencies \
+    && rm -rf /znc-src; exit 0
+
+RUN mkdir /docker \
+    && apk add --no-cache --virtual build-dependencies \
     && cd /docker \
     && git clone https://github.com/jreese/znc-push.git \
     && cd /docker/znc-push \
@@ -58,7 +60,6 @@ RUN set -x \
     && cp /docker/znc-push/push.so /docker/modules/ \
     && rm -rf /docker/znc-push \
     && apk del build-dependencies \
-    && rm -rf /znc-src \
     && /clean_py.sh; exit 0
 
 # Add our users for ZNC
@@ -67,16 +68,6 @@ RUN addgroup -g 1000 -S znc
 
 #Make the ZNC Data dir
 RUN mkdir /znc-data
-#RUN mkdir /docker
-
-# Python pushover
-#WORKDIR /docker
-#RUN git clone https://github.com/jreese/znc-push.git
-#WORKDIR /docker/znc-push
-#RUN git checkout -b python
-#ENV PATH=$PATH:/opt/znc/bin
-#ENV PYTHONDONTWRITEBYTECODE=yes
-#RUN make
 
 #Copy the necessary files
 WORKDIR /
@@ -87,11 +78,6 @@ COPY znc.conf.example /docker
 RUN chown -R znc:znc /znc-data
 RUN chown -R znc:znc /docker
 
-###TEMP
-#RUN apk add --no-cache --virtual ncdu
-###TEMP
-
-#RUN rm -rf /znc-src
 #The user that we enter the container as, and that everything runs as
 USER znc
 VOLUME /znc-data
