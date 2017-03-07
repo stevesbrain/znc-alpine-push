@@ -1,0 +1,8 @@
+znc:
+  image: 'vanityshed/znc-alpine-push:latest'
+  restart: always
+
+  ports:
+    - '6501:6501'
+  volumes:
+    - '/opt/dockerdata/znc:/znc-data'
