@@ -13,7 +13,7 @@ ENV ZNC_VERSION 1.6.4
 
 #Cleaning house
 COPY clean_py.sh /
-#RUN apk del build-dependencies
+# Build ZNC
 RUN set -x \
     && apk add --no-cache --virtual runtime-dependencies \
         ca-certificates \
@@ -48,11 +48,13 @@ RUN set -x \
     && apk del build-dependencies \
     && rm -rf /znc-src; exit 0
 
+# Build the ZNC modules
 RUN mkdir /docker \
     && apk add --no-cache --virtual build-dependencies \
     && cd /docker \
     && git clone https://github.com/jreese/znc-push.git \
     && cd /docker/znc-push \
+    && PYTHONDONTWRITEBYTECODE=yes \
     && git checkout -b python \
     && PATH=$PATH:/opt/znc/bin \
     && make \
