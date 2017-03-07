@@ -9,11 +9,13 @@ fi
 mkdir -p /znc-data/configs
 mkdir -p /znc-data/moddata
 mkdir -p /znc-data/users
+mkdir -p /znc-data/modules
 
 if [ -e /znc-data/configs/znc.conf ]; then
     echo "Doing nothing; conf exists"
   else
 	  /opt/znc/bin/znc -p -d /znc-data/ 
+	  cp /docker/modules/push.so /znc-data/modules/push.so
 	  cp /docker/znc.conf.example /znc-data/configs/znc.conf
 fi
     

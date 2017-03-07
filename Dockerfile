@@ -54,8 +54,8 @@ RUN set -x \
     && git checkout -b python \
     && PATH=$PATH:/opt/znc/bin \
     && make \
-    && mkdir -p /znc-data/modules \
-    && cp /docker/znc-push/push.so /znc-data/modules/ \
+    && mkdir -p /docker/modules \
+    && cp /docker/znc-push/push.so /docker/modules/ \
     && rm -rf /docker/znc-push \
     && apk del build-dependencies \
     && rm -rf /znc-src \
