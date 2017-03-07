@@ -7,7 +7,7 @@ LABEL build_version="stevesbrain version:- ${VERSION} Build-date:- ${BUILD_DATE}
 ENV GPG_KEY D5823CACB477191CAC0075555AE420CC0209989E
 # package version
 ARG CONFIGUREFLAGS="--prefix=/opt/znc --enable-cyrus --enable-perl --enable-python --disable-ipv6"
-ARG MAKEFLAGS=""
+ARG MAKEFLAGS="-j"
 
 ENV ZNC_VERSION 1.6.4
 
@@ -41,7 +41,7 @@ RUN set -x \
     && tar -zxf znc.tgz --strip-components=1 \
     && mkdir build && cd build \
     && ../configure ${CONFIGUREFLAGS} \
-    && make $MAKEFLAGS -j \
+    && make $MAKEFLAGS \
     && make install \
     && mkdir /docker \
     && cd /docker \
