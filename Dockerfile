@@ -1,4 +1,4 @@
-FROM alpine:3.5
+FROM alpine:3.6
 MAINTAINER Stevesbrain
 # set version label
 ARG BUILD_DATE
@@ -36,7 +36,8 @@ RUN set -x \
     && curl -fsSL "http://znc.in/releases/archive/znc-${ZNC_VERSION}.tar.gz" -o znc.tgz \
     && curl -fsSL "http://znc.in/releases/archive/znc-${ZNC_VERSION}.tar.gz.sig" -o znc.tgz.sig \
     && export GNUPGHOME="$(mktemp -d)" \
-    && gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "${GPG_KEY}" \
+    && curl https://gist.githubusercontent.com/stevesbrain/e0cb404d3a31fde8cd23a36fadebe2e8/raw/bc06cd01785b371b3beb3408ff1b25fdecbcbe48/DarthGandalfKey.asc | gpg --import \
+    #&& gpg --recv-keys "${GPG_KEY}" \
     && gpg --batch --verify znc.tgz.sig znc.tgz \
     && rm -rf "$GNUPGHOME" \
     && tar -zxf znc.tgz --strip-components=1 \
@@ -90,5 +91,5 @@ RUN chown -R znc:znc /docker
 #The user that we enter the container as, and that everything runs as
 USER znc
 VOLUME /znc-data
-ENV BUILD 0.2.4
+ENV BUILD 0.3.0
 ENTRYPOINT ["/docker-entrypoint.sh"]
