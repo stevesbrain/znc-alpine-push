@@ -6,3 +6,4 @@ znc:
     - '6501:6501'
   volumes:
     - '/opt/dockerdata/znc:/znc-data'
+    - '/etc/localtime:/etc/localtime:ro'
