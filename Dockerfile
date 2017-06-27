@@ -59,6 +59,7 @@ RUN set -x \
 	openssl-dev \
 	python3-dev \
     && cd /docker \
+    # znc-push
     && git clone https://github.com/jreese/znc-push.git \
     && cd /docker/znc-push \
     && PYTHONDONTWRITEBYTECODE=yes \
@@ -68,10 +69,19 @@ RUN set -x \
     && mkdir -p /docker/modules \
     && cp /docker/znc-push/push.so /docker/modules/ \
     && cd /docker \
+    # modignore
     && git clone https://github.com/moshee/modignore \
     && cd /docker/modignore \
     && znc-buildmod ignore.cc \
     && cp ignore.so /docker/modules/ \
+    # simple_disconnect
+    && cd /docker \
+    && mkdir /docker/simple_disconnect \
+    && cd /docker/simple_disconnect \
+    && curl -fsSL https://gist.githubusercontent.com/maxpowa/57e5d6fb3afb944671f5/raw/8158ec1e4325c5d04078ff77143f7ca5bdd8ed67/simple_disconnect.cpp -o simple_disconnect.cpp \
+    && znc-buildmod simple_disconnect.cpp \
+    && cp /docker/simple_disconnect/simple_disconnect.so /docker/modules/ \
+    && cd /docker \
     && rm -rf /docker/znc-push \
     && rm -rf /docker/modignore \
     && rm -rf /src \
