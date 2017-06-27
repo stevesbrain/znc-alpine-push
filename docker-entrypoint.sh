@@ -16,6 +16,7 @@ if [ -e /znc-data/configs/znc.conf ]; then
   else
 	  /opt/znc/bin/znc -p -d /znc-data/ 
 	  cp /docker/modules/push.so /znc-data/modules/push.so
+	  cp /docker/modules/ignore.so /znc-data/modules/ignore.so
 	  cp /docker/znc.conf.example /znc-data/configs/znc.conf
 fi
     

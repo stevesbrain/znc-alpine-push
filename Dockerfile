@@ -66,7 +66,13 @@ RUN set -x \
     && make \
     && mkdir -p /docker/modules \
     && cp /docker/znc-push/push.so /docker/modules/ \
+    && cd /docker \
+    && git clone https://github.com/moshee/modignore \
+    && cd /docker/modignore \
+    && znc-buildmod ignore.cc \
+    && cp ignore.so /docker/modules/ \
     && rm -rf /docker/znc-push \
+    && rm -rf /docker/modignore \
     && rm -rf /src \
     && apk del --purge build-dependencies build-base \
     && /clean_py.sh; exit 0
