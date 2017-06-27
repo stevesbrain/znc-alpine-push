@@ -58,6 +58,7 @@ RUN set -x \
 	icu-dev \
 	openssl-dev \
 	python3-dev \
+	curl \
     && cd /docker \
     # znc-push
     && git clone https://github.com/jreese/znc-push.git \
@@ -85,7 +86,7 @@ RUN set -x \
     && rm -rf /docker/znc-push \
     && rm -rf /docker/modignore \
     && rm -rf /src \
-    && apk del --purge build-dependencies build-base \
+    && apk del --purge build-dependencies build-base curl \
     && /clean_py.sh; exit 0
 
 # Add our users for ZNC
