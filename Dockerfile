@@ -57,14 +57,14 @@ RUN set -x \
         build-base \
 	icu-dev \
 	openssl-dev \
-	python3-dev \
+	#python3-dev \
 	curl \
     && cd /docker \
     # znc-push
     && git clone https://github.com/jreese/znc-push.git \
     && cd /docker/znc-push \
-    && PYTHONDONTWRITEBYTECODE=yes \
-    && git checkout -b python \
+    #&& PYTHONDONTWRITEBYTECODE=yes \
+    #&& git checkout -b python \
     && PATH=$PATH:/opt/znc/bin \
     && make \
     && mkdir -p /docker/modules \
