@@ -108,5 +108,5 @@ RUN chown -R znc:znc /docker
 #The user that we enter the container as, and that everything runs as
 USER znc
 VOLUME /znc-data
-ENV BUILD 0.3.5
+ENV BUILD 0.3.6
 ENTRYPOINT ["/docker-entrypoint.sh"]
