@@ -1,5 +1,5 @@
-[![Docker Stars](https://img.shields.io/docker/stars/vanityshed/znc-alpine-push.svg)]
-[![Docker PUlls](https://img.shields.io/docker/pulls/vanityshed/znc-alpine-push.svg)]
+![Docker Stars](https://img.shields.io/docker/stars/vanityshed/znc-alpine-push.svg)
+![Docker PUlls](https://img.shields.io/docker/pulls/vanityshed/znc-alpine-push.svg)
 
 ## Notes
   * The "-j" flag initiates multi core building. This uses A LOT of RAM. If you don't have a lot of RAM, you need a lot of swap. If you don't have a lot of swap, don't build with multi core, or manually limit the amount of cores you use.
