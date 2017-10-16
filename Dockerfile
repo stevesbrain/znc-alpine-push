@@ -23,6 +23,7 @@ RUN set -x \
         tini \
 	py3-requests \
 	git \
+	tzdata \
     && apk add --no-cache --virtual build-dependencies \
         build-base \
         curl \
