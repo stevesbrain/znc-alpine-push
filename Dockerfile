@@ -38,7 +38,6 @@ RUN set -x \
     && curl -fsSL "http://znc.in/releases/archive/znc-${ZNC_VERSION}.tar.gz.sig" -o znc.tgz.sig \
     && export GNUPGHOME="$(mktemp -d)" \
     && curl https://gist.githubusercontent.com/stevesbrain/e0cb404d3a31fde8cd23a36fadebe2e8/raw/bc06cd01785b371b3beb3408ff1b25fdecbcbe48/DarthGandalfKey.asc | gpg --import \
-    #&& gpg --recv-keys "${GPG_KEY}" \
     && gpg --batch --verify znc.tgz.sig znc.tgz \
     && rm -rf "$GNUPGHOME" \
     && tar -zxf znc.tgz --strip-components=1 \
@@ -58,25 +57,19 @@ RUN set -x \
         build-base \
 	icu-dev \
 	openssl-dev \
-	#python3-dev \
 	curl \
     && cd /docker \
-    # znc-push
     && git clone https://github.com/jreese/znc-push.git \
     && cd /docker/znc-push \
-    #&& PYTHONDONTWRITEBYTECODE=yes \
-    #&& git checkout -b python \
     && PATH=$PATH:/opt/znc/bin \
     && make \
     && mkdir -p /docker/modules \
     && cp /docker/znc-push/push.so /docker/modules/ \
     && cd /docker \
-    # modignore
     && git clone https://github.com/moshee/modignore \
     && cd /docker/modignore \
     && znc-buildmod ignore.cc \
     && cp ignore.so /docker/modules/ \
-    # simple_disconnect
     && cd /docker \
     && mkdir /docker/simple_disconnect \
     && cd /docker/simple_disconnect \
