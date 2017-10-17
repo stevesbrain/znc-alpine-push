@@ -10,7 +10,6 @@ mkdir -p /znc-data/configs
 mkdir -p /znc-data/moddata
 mkdir -p /znc-data/users
 mkdir -p /znc-data/modules
-ls /docker/modules/
 cp /docker/modules/*.so /znc-data/modules/
 #cp /docker/modules/ignore.so /znc-data/modules/ignore.so
 #cp /docker/modules/simple_disconnect.so /znc-data/modules/simple_disconnect.so
