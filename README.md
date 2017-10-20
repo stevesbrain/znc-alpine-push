@@ -87,4 +87,3 @@ sudo docker start znc
 # Need shell?
 sudo docker exec -it znc /bin/sh
 ```
-a
