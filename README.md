@@ -76,8 +76,7 @@ docker-compose up -d
 ## Basic Build Process
 
 ```bash
-sudo docker build ./
-sudo docker tag e413 znc-alpine:latest
+sudo docker build -t znc-alpine ./
 sudo docker create \
   --name=znc \
   -v /opt/dockerdata/znc:/znc-data \
