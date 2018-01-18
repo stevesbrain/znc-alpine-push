@@ -1,4 +1,4 @@
-FROM alpine:3.6
+FROM alpine:3.7
 MAINTAINER Stevesbrain
 # set version label
 ARG BUILD_DATE
