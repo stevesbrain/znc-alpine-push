@@ -3,7 +3,7 @@
 
 
 ## What is this?
-This is the latest stable ZNC build on latest Alpine with current ZNC-Push python branch
+This is the latest stable ZNC build on latest Alpine with current ZNC-Push master branch
 
 ## How do I run this?
 Before you do anything, this example assumes you have created /opt/dockerdata/znc and run ''chown -R 1000:1000'' on that folder (or equivalent user you plan to use).
