@@ -1,19 +1,15 @@
 FROM alpine:3.8
 MAINTAINER Stevesbrain
-# set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="stevesbrain version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 ENV GPG_KEY D5823CACB477191CAC0075555AE420CC0209989E
-# package version
 ARG CONFIGUREFLAGS="--prefix=/opt/znc --enable-cyrus --enable-perl --enable-python --disable-ipv6"
 ARG MAKEFLAGS="-j"
 
 ENV ZNC_VERSION 1.7.1
 
-#Cleaning house
 COPY clean_py.sh /
-# Build ZNC
 RUN set -x \
     && apk add --no-cache --virtual runtime-dependencies \
         ca-certificates \
@@ -50,7 +46,6 @@ RUN set -x \
     && apk del --purge build-dependencies \
     && rm -rf /znc-src; exit 0
 
-# Build the ZNC modules
 RUN set -x \
     && mkdir /docker \
     && apk add --no-cache --virtual build-dependencies \
@@ -83,23 +78,18 @@ RUN set -x \
     && apk del --purge build-dependencies build-base curl \
     && /clean_py.sh; exit 0
 
-# Add our users for ZNC
 RUN adduser -u 1000 -S znc
 RUN addgroup -g 1000 -S znc
 
-#Make the ZNC Data dir
 RUN mkdir /znc-data
 
-#Copy the necessary files
 WORKDIR /
 COPY docker-entrypoint.sh /
 COPY znc.conf.example /docker
 
-#Change ownership as needed
 RUN chown -R znc:znc /znc-data
 RUN chown -R znc:znc /docker
 
-#The user that we enter the container as, and that everything runs as
 USER znc
 VOLUME /znc-data
 ENV BUILD 0.3.6
