@@ -1,5 +1,6 @@
 znc:
-  image: 'vanityshed/znc-alpine-push:latest'
+        #image: 'vanityshed/znc-alpine-push:latest'
+  image: fc3890091af7
   restart: always
 
   ports:
