@@ -7,7 +7,7 @@ ENV GPG_KEY D5823CACB477191CAC0075555AE420CC0209989E
 ARG CONFIGUREFLAGS="--prefix=/opt/znc --enable-cyrus --enable-perl --enable-python --disable-ipv6"
 ARG MAKEFLAGS="-j"
 
-ENV ZNC_VERSION 1.7.4
+ENV ZNC_VERSION 1.7.5
 
 COPY clean_py.sh /
 RUN set -x \
